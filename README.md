@@ -45,6 +45,10 @@ The default path can be changed in `conf.py` Line 269.
 IMSE requires the ImageNet validation set for source domain feature extraction.
 Update the `data_dir` path in the `prepare_test_data` function at `main.py` Line 251.
 
+### ViDA Source Model (Required for ViDA)
+
+Download the ViDA source model from [Google Drive](https://drive.google.com/file/d/1-ft1sUROp6nb57ToLf4USifUGUguFlJF/view?usp=sharing) and place it in the `checkpoint/` folder.
+
 ## Usage
 
 ### Basic

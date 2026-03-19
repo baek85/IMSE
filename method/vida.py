@@ -35,8 +35,10 @@ def get_tta_transforms(gaussian_std: float=0.005, soft=False, clip_inputs=False)
             translate=(1/16, 1/16),
             scale=(0.95, 1.05) if soft else (0.9, 1.1),
             shear=None,
-            resample=PIL.Image.BILINEAR,
-            fillcolor=None
+            # resample=PIL.Image.BILINEAR,
+            # fillcolor=None
+            interpolation=PIL.Image.BILINEAR,
+            fill=0
         ),
         transforms.GaussianBlur(kernel_size=5, sigma=[0.001, 0.25] if soft else [0.001, 0.5]),
         transforms.CenterCrop(size=n_pixels),
