@@ -1,0 +1,51 @@
+CORRUPTION:
+  DATASET: imagenet
+  SEVERITY:
+  - 5
+  TYPE:
+    - gaussian_noise
+    - shot_noise
+    - impulse_noise
+    - defocus_blur
+    - glass_blur
+    - motion_blur
+    - zoom_blur
+    - snow
+    - frost
+    - fog
+    - brightness
+    - contrast
+    - elastic_transform
+    - pixelate
+    - jpeg_compression
+MODEL:
+  ADAPTATION: imse
+  # ARCH: Standard_VITB
+  ARCH: VITB_augreg_in21k_ours
+SVD:
+  COMPONENT_NUM: 14
+  MODE: svft
+  DYNAMIC: True
+  NUM_SEEN_TEST_DOMAINS: 1
+  DYNAMIC_MODE: top1_adapt
+  FEATURE_LAYER: "[-1]"
+  DSS_K: 0.05
+  LOAD_OPTIMIZER_STATE: reset
+  MODE: svft_variance_maximization
+  DECOMPOSE_QKV: False
+  COMPONENT_NUM: 14
+  VM_WEIGHT: 50.0
+  VM_NUM: 3
+  DYNAMIC_POOL: dss
+OPTIM:
+  BETA: 0.9
+  LR: 7e-3
+  NORM_LR: 0.0
+  METHOD: SAM_Adam
+  STEPS: 1
+  WD: 0.0
+  MT: 0.8
+  MT_ViDA: 0.8
+  
+TEST:
+  BATCH_SIZE: 64

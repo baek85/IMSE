@@ -1,4 +1,81 @@
-# IMSE  
-Official repository of **IMSE: Intrinsic Mixture of Spectral Experts Fine-tuning for Test-Time Adaptation (ICLR 2026 Poster)**
+# IMSE
 
-🚧 The official implementation will be released soon.
+Official repository of IMSE: Intrinsic Mixture of Spectral Experts Fine-tuning for Test-Time Adaptation (ICLR 2026 Poster)
+Supports multiple adaptation methods including Source, TENT, CoTTA, ViDA, and IMSE.
+
+## Requirements
+
+- Python 3.9+
+- CUDA GPU
+- Conda
+
+## Installation
+
+```bash
+conda env create -f environment.yaml
+conda activate vida
+```
+
+## Data Preparation
+
+### ImageNet-C (Required)
+
+Download [ImageNet-C](https://github.com/hendrycks/imagenet-c) and organize it as shown below.
+The `ImageNet-C` folder must be placed inside the path specified by `--data_dir`.
+The default path can be changed in `conf.py` Line 269.
+
+```
+<data_dir>/
+└── ImageNet-C/
+    ├── gaussian_noise/
+    │   ├── 1/
+    │   ├── 2/
+    │   ├── 3/
+    │   ├── 4/
+    │   └── 5/
+    ├── shot_noise/
+    ├── impulse_noise/
+    ├── defocus_blur/
+    ├── ...
+    └── jpeg_compression/
+```
+
+### ImageNet (Optional, for IMSE)
+
+IMSE requires the ImageNet validation set for source domain feature extraction.
+Update the `data_dir` path in the `prepare_test_data` function at `main.py` Line 251.
+
+## Usage
+
+### Basic
+
+```bash
+python main.py --cfg ./cfgs/vit/source.yaml --data_dir <path_to_data> --exp_name my_exp
+```
+
+### Scripts
+
+Pre-defined scripts for each setting are available in the `bash/` directory.
+
+| Script | Setting | Methods |
+|--------|---------|---------|
+| `bash/0_others_ctta.sh` | C-TTA | Source, CoTTA, TENT, ViDA |
+| `bash/1_imse_ctta.sh` | C-TTA | IMSE |
+| `bash/2_others_recurring.sh` | Recurring | CoTTA, ViDA, TENT |
+| `bash/3_imse_recurring.sh` | Recurring | IMSE |
+
+
+## Project Structure
+
+```
+.
+├── main.py              # Entry point
+├── conf.py              # Configuration
+├── environment.yaml     # Conda environment
+├── bash/                # Shell scripts
+├── cfgs/                # Config files
+├── method/              # TTA methods (tent, cotta, vida, svd)
+├── robustbench/         # Data loading, model zoo
+├── timm/                # ViT models
+└── checkpoint/          # ViDA checkpoint
+```
