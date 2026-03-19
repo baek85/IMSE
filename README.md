@@ -81,5 +81,5 @@ Pre-defined scripts for each setting are available in the `bash/` directory.
 ├── method/              # TTA methods (tent, cotta, vida, svd)
 ├── robustbench/         # Data loading, model zoo
 ├── timm/                # ViT models
-└── checkpoint/          # ViDA checkpoint
+└── ckpt/                # ViT Checkpoint
 ```
