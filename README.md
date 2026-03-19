@@ -57,6 +57,24 @@ Download the ViDA source model from [Google Drive](https://drive.google.com/file
 python main.py --cfg ./cfgs/vit/source.yaml --data_dir <path_to_data> --exp_name my_exp
 ```
 
+### IMSE-Retrieval
+
+We provide two domain selection strategies for continual TTA:
+
+**Select most similar domain, IMSE-Retrieval**
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --cfg ./cfgs/vit/imse.yaml --data_dir <path_to_data> --exp_name my_exp \
+    SETTING continual
+```
+
+**Domain-distance-based spectral code generation, extension of IMSE-Retrieval**
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --cfg ./cfgs/vit/imse.yaml --data_dir <path_to_data> --exp_name my_exp \
+    SETTING continual SVD.DYNAMIC_MODE mix_adapt SVD.TEMP 1.0
+```
+
 ### Scripts
 
 Pre-defined scripts for each setting are available in the `bash/` directory.
@@ -67,6 +85,9 @@ Pre-defined scripts for each setting are available in the `bash/` directory.
 | `bash/1_imse_ctta.sh` | C-TTA | IMSE |
 | `bash/2_others_recurring.sh` | Recurring | CoTTA, ViDA, TENT |
 | `bash/3_imse_recurring.sh` | Recurring | IMSE |
+
+
+
 
 
 ## Project Structure
